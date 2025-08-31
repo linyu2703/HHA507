@@ -1,9 +1,6 @@
 import pandas as pd
 
-# Step 1: Load the Data
-# Replace 'your_file_path.csv' with the actual file path or URL of the dataset
-# Use a delimiter argument if the data is separated by a character other than a comma (e.g., | or ;)
-# For us we need to use | as the delimiter
+# Step 1:
 data = pd.read_csv('inpatient.csv', sep='|')
 
 # Display the first few rows of the dataset to understand its structure
@@ -15,6 +12,8 @@ print(data.head())
 icd_codes = data['ICD_DGNS_CD1']
 drg_codes = data['CLM_DRG_CD']
 hcpcs_codes = data['HCPCS_CD']
+npi_codes = data['OP_PHYSN_NPI']
+
 
 # Step 3: Analyze the Frequency of Each Unique Value
 # Calculate the frequency of unique values in each codex column
@@ -30,6 +29,10 @@ print("DRG Codes Frequency:\n", drg_frequency)
 # Frequency count for HCPCS codes
 hcpcs_frequency = hcpcs_codes.value_counts()
 print("HCPCS Codes Frequency:\n", hcpcs_frequency)
+
+#Frequency count for NPI codes
+npi_frequency = npi_codes.value_counts().unique()
+print("NPI Codes Frequency:\n", len(npi_frequency))
 
 # Step 4: Handle Missing Data (if any)
 # Check for missing values in codex-related columns
