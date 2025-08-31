@@ -4,7 +4,7 @@ import pandas as pd
 # Replace 'your_file_path.csv' with the actual file path or URL of the dataset
 # Use a delimiter argument if the data is separated by a character other than a comma (e.g., | or ;)
 # For us we need to use | as the delimiter
-data = pd.read_csv('your_file_path.csv', sep='|')
+data = pd.read_csv('inpatient.csv', sep='|')
 
 # Display the first few rows of the dataset to understand its structure
 print(data.head())
@@ -12,9 +12,9 @@ print(data.head())
 # Step 2: Explore the Dataset
 # Identify the columns related to medical codexes (e.g., ICD codes, DRG codes)
 # Assuming 'ICD_CODE', 'DRG_CODE', and 'HCPCS_CODE' are the columns containing codex data
-icd_codes = data['ICD_CODE']
-drg_codes = data['DRG_CODE']
-hcpcs_codes = data['HCPCS_CODE']
+icd_codes = data['ICD_DGNS_CD1']
+drg_codes = data['CLM_DRG_CD']
+hcpcs_codes = data['HCPCS_CD']
 
 # Step 3: Analyze the Frequency of Each Unique Value
 # Calculate the frequency of unique values in each codex column
@@ -42,9 +42,9 @@ print(f"Missing DRG Codes: {missing_drg}")
 print(f"Missing HCPCS Codes: {missing_hcpcs}")
 
 # Example of handling missing data by filling with a placeholder
-data['ICD_CODE'].fillna('MISSING', inplace=True)
-data['DRG_CODE'].fillna('MISSING', inplace=True)
-data['HCPCS_CODE'].fillna('MISSING', inplace=True)
+data['ICD_DGNS_CD1'].fillna('MISSING', inplace=True)
+data['CLM_DRG_CD'].fillna('MISSING', inplace=True)
+data['HCPCS_CD'].fillna('MISSING', inplace=True)
 
 # Step 5: Summary of Findings
 # Provide a summary of the most common codes
@@ -56,6 +56,6 @@ print("Top 5 Most Common HCPCS Codes:\n", hcpcs_frequency.head())
 # Additional Analysis Example
 # Are there any patterns? For instance, let's see if certain DRG codes are more common
 # when ICD codes are specific values (e.g., 'E11' for Type 2 Diabetes)
-diabetes_related = data[data['ICD_CODE'].str.contains('E11', na=False)]
-common_drg_for_diabetes = diabetes_related['DRG_CODE'].value_counts()
+diabetes_related = data[data['ICD_DGNS_CD1'].str.contains('E11', na=False)]
+common_drg_for_diabetes = diabetes_related['CLM_DRG_CD'].value_counts()
 print("Most Common DRG Codes for Patients with ICD Code E11 (Type 2 Diabetes):\n", common_drg_for_diabetes)
