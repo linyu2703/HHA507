@@ -109,8 +109,8 @@ print("Top 5 most common ICD procedures for patients dealing with the Z733, stre
             
 # What patient discharge codes are most commonly given to patients with ICD ("F41") - anxiety disorders?
 anxiety_related = data[data['ICD_DGNS_CD1'].str.contains('F41', na=False)]
-discharge_status_for_anxiety = anxiety_related['PTNT_DSCHRG_STUS_CD'].value_counts().head()
-print("Top 5 most discharge statuses given to patients with anxiety disorders, F41 ICD diagnosis code:\n", discharge_status_for_anxiety)
+discharge_status_for_anxiety = anxiety_related['PTNT_DSCHRG_STUS_CD'].value_counts()
+print("Most common discharge statuses given to patients with anxiety disorders, F41 ICD diagnosis code:\n", discharge_status_for_anxiety)
 
 
 
