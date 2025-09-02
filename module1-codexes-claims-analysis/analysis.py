@@ -14,7 +14,7 @@ icd_e_codes = data['ICD_DGNS_E_CD1']
 icd_p_codes = data['ICD_PRCDR_CD1']
 drg_codes = data['CLM_DRG_CD']
 hcpcs_codes = data['HCPCS_CD']
-npi_codes = data['OP_PHYSN_NPI']
+npi_codes = data['AT_PHYSN_NPI']
 prncpal_dgns_codes = data['PRNCPAL_DGNS_CD']
 admit_date_codes = data['CLM_ADMSN_DT']
 
@@ -79,7 +79,7 @@ data['ICD_DGNS_E_CD1'].fillna('MISSING', inplace=True)
 data['ICD_PRCDR_CD1'].fillna('MISSING', inplace=True)
 data['CLM_DRG_CD'].fillna('MISSING', inplace=True)
 data['HCPCS_CD'].fillna('MISSING', inplace=True)
-data['OP_PHYSN_NPI'].fillna('MISSING', inplace=True)
+data['AT_PHYSN_NPI'].fillna('MISSING', inplace=True)
 data['PRNCPAL_DGNS_CD'].fillna('MISSING', inplace=True)
 data['CLM_ADMSN_DT'].fillna('MISSING', inplace=True)
 
@@ -119,3 +119,4 @@ common_procedures_for_w86 = w86_related['ICD_PRCDR_CD1'].value_counts().head()
 print("Top 5 most common ICD procedures done for patients dealing with W86, the most common ICD E diagnosis code:\n", common_procedures_for_w86)
 #Very similar procedures done for patients experiencing external cause of injury, poisoning, or other adverse effects compared to internal.
 
+#What DRG codes are commonly associated with 99221 HCPCS code
