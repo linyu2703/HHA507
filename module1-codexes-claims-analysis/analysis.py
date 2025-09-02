@@ -16,7 +16,7 @@ drg_codes = data['CLM_DRG_CD']
 hcpcs_codes = data['HCPCS_CD']
 npi_codes = data['OP_PHYSN_NPI']
 prncpal_dgns_codes = data['PRNCPAL_DGNS_CD']
-discharge_codes = data['PTNT_DSCHRG_STUS_CD']
+admit_date_codes = data['CLM_ADMSN_DT']
 
 # Step 3: Analyze the Frequency of Each Unique Value
 # Calculate the frequency of unique values in each codex column
@@ -49,9 +49,9 @@ print("NPI Codes Frequency:\n", npi_frequency)
 prncpal_dgns_frequency = prncpal_dgns_codes.value_counts()
 print("Principal Diagnosis Codes Frequency:\n", prncpal_dgns_frequency)
 
-# Frequency count for Patient Discharge Status codes
-discharge_frequency = discharge_codes.value_counts()
-print("Patient Discharge Status Codes Frequency:\n", discharge_frequency)
+# Frequency count for patient admit dates
+admit_date_frequency = admit_date_codes.value_counts()
+print("Patient Admit Date Frequency:\n", admit_date_frequency)
 
 # Step 4: Handle Missing Data (if any)
 # Check for missing values in codex-related columns
@@ -62,7 +62,7 @@ missing_drg = drg_codes.isnull().sum()
 missing_hcpcs = hcpcs_codes.isnull().sum()
 missing_npi = npi_codes.isnull().sum()
 missing_prncpal_dgns = prncpal_dgns_codes.isnull().sum()
-missing_discharge = discharge_codes.isnull().sum()
+missing_admit_date = admit_date_codes.isnull().sum()
 
 print(f"Missing ICD Codes: {missing_icd}")
 print(f"Missing ICD E Codes: {missing_icd_e}")
@@ -71,7 +71,7 @@ print(f"Missing DRG Codes: {missing_drg}")
 print(f"Missing HCPCS Codes: {missing_hcpcs}")
 print(f"Missing NPI Codes: {missing_npi}")
 print(f"Missing Principal Diagnosis Codes: {missing_prncpal_dgns}")
-print(f"Missing Discharge Codes: {missing_discharge}")
+print(f"Missing Admit Dates: {missing_admit_date}")
 
 # Example of handling missing data by filling with a placeholder
 data['ICD_DGNS_CD1'].fillna('MISSING', inplace=True)
@@ -81,7 +81,7 @@ data['CLM_DRG_CD'].fillna('MISSING', inplace=True)
 data['HCPCS_CD'].fillna('MISSING', inplace=True)
 data['OP_PHYSN_NPI'].fillna('MISSING', inplace=True)
 data['PRNCPAL_DGNS_CD'].fillna('MISSING', inplace=True)
-data['PTNT_DSCHRG_STUS_CD'].fillna('MISSING', inplace=True)
+data['CLM_ADMSN_DT'].fillna('MISSING', inplace=True)
 
 # Step 5: Summary of Findings
 # Provide a summary of the most common codes
@@ -93,7 +93,7 @@ print("Top 5 Most Common DRG Codes:\n", drg_frequency.head())
 print("Top 5 Most Common HCPCS Codes:\n", hcpcs_frequency.head())
 print("Top 5 Most Common NPI Codes:\n", npi_frequency.head())
 print("Top 5 Most Common Principal Diagnosis Codes:\n", prncpal_dgns_frequency.head())
-print("Top 5 Most Common Discharge Codes:\n", discharge_frequency.head())
+print("Top 5 Most Common Admit Dates:\n", admit_date_frequency.head())
 
 # Additional Analysis Example
 # Are there any patterns? For instance, let's see if certain DRG codes are more common
@@ -107,10 +107,15 @@ stress_related = data[data['ICD_DGNS_CD1'].str.contains('Z733', na=False)]
 common_procedures_for_stress = stress_related['ICD_PRCDR_CD1'].value_counts().head()
 print("Top 5 most common ICD procedures for patients dealing with the Z733, stress, the most common ICD diagnosis code:\n", common_procedures_for_stress)
             
-# What patient discharge codes are most commonly given to patients with ICD ("F41") - anxiety disorders?
+# What admit dates are most commonly associated with ICD ("F41") - anxiety disorders?
 anxiety_related = data[data['ICD_DGNS_CD1'].str.contains('F41', na=False)]
-discharge_status_for_anxiety = anxiety_related['PTNT_DSCHRG_STUS_CD'].value_counts()
-print("Most common discharge statuses given to patients with anxiety disorders, F41 ICD diagnosis code:\n", discharge_status_for_anxiety)
+common_dates_for_anxiety = anxiety_related['CLM_ADMSN_DT'].value_counts()
+print("Most common dates for patients experiencing anxiety disorders:\n", common_dates_for_anxiety)
+# Mostly around holidays towards the end of the year!
 
-
+#What ICD procedures are commonly performed for the most common ICD E code, W86?
+w86_related = data[data['ICD_DGNS_E_CD1'].str.contains('W86', na=False)]
+common_procedures_for_w86 = w86_related['ICD_PRCDR_CD1'].value_counts().head()
+print("Top 5 most common ICD procedures done for patients dealing with W86, the most common ICD E diagnosis code:\n", common_procedures_for_w86)
+#Very similar procedures done for patients experiencing external cause of injury, poisoning, or other adverse effects compared to internal.
 
