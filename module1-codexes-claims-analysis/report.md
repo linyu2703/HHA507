@@ -6,4 +6,7 @@
 <p><strong>Step 4: </strong>Identifying and handling missing values in the columns.<p>
 <p>Filled in missing and null values with "MISSING" for clarity purposes.</p>
 <p><strong>Step 5: </strong>Summarizing findings and data analysis.</p>
-    <li style="list-style-position: inside; text-indent: 10px;">Top 5 most common ICD codes: </li>
+    <ul style = "margin-left: 10px;">
+    <li>Top 5 most common ICD codes: </li>
+    <li>Top 5 most common DRG codes: </li>
+    </ul>
