@@ -6,4 +6,4 @@
 <p><strong>Step 4: </strong>Identifying and handling missing values in the columns.<p>
 <p>Filled in missing and null values with "MISSING" for clarity purposes.</p>
 <p><strong>Step 5: </strong>Summarizing findings and data analysis.</p>
-    <li style=text-indent: 10px;>Top 5 most common ICD codes: </li>
+    <li style="margin-left: 10px;">Top 5 most common ICD codes: </li>
